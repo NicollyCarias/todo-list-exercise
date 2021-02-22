@@ -13,17 +13,18 @@ async function fetchData() {
     filho3.parentNode.removeChild(filho3);
     filho4.parentNode.removeChild(filho4);
     filho5.parentNode.removeChild(filho5);
-  }
+  };
+
   removerOPadrao();
 
   function crescente(array) {
     for(let i = 0; i < array.length; i += 1) {
-      for(let j = 0; j < array.length - 1; j+=1){
-        let swap = [];
-        if(array[j].priority > array[j+1].priority) {
-          swap = array[j];
-          array[j] = array[j+1]
-          array[j+1] = swap;
+      for(let posicao = 0; posicao < array.length - 1; posicao+=1){
+        let troca = [];
+        if(array[posicao].priority > array[posicao+1].priority) {
+          troca = array[posicao];
+          array[posicao] = array[posicao+1];
+          array[posicao+1] = troca;
         };
       }
     }
@@ -34,12 +35,12 @@ async function fetchData() {
 
   function ordenarData(array) {
     for(let i = 0; i < array.length; i += 1) {
-      for(let j = 0; j < array.length - 1; j+=1){
-        let swap = [];
-        if(array[j].due_date > array[j+1].due_date && array[j].priority === array[j+1].priority) {
-          swap = array[j];
-          array[j] = array[j+1]
-          array[j+1] = swap;
+      for(let posicaoDataAtual = 0; posicaoDataAtual < array.length - 1; posicaoDataAtual+=1){
+        let trocarData = [];
+        if(array[posicaoDataAtual].due_date > array[posicaoDataAtual+1].due_date && array[posicaoDataAtual].priority === array[posicaoDataAtual+1].priority) {
+          trocarData = array[posicaoDataAtual];
+          array[posicaoDataAtual] = array[posicaoDataAtual+1]
+          array[posicaoDataAtual+1] = trocarData;
         };
       };
     };
@@ -59,15 +60,15 @@ async function fetchData() {
         const string = data[i].due_date;
         const converterParaDate = new Date(string).toLocaleDateString('pt-BR');
         h3.innerText = converterParaDate;
-        const pT = document.createElement('p');
-        pT.id = 'tasks';
-        pT.innerText = data[i].task_name;
-        const pP = document.createElement('p');
-        pP.id = 'prioridade';
-        pP.innerHTML = `Prioridade: ${data[i].priority}`;
+        const pTask = document.createElement('p');
+        pTask.id = 'tasks';
+        pTask.innerText = data[i].task_name;
+        const pPrioridade = document.createElement('p');
+        pPrioridade.id = 'prioridade';
+        pPrioridade.innerHTML = `Prioridade: ${data[i].priority}`;
         list.appendChild(h3);
-        list.appendChild(pT);
-        list.appendChild(pP);
+        list.appendChild(pTask);
+        list.appendChild(pPrioridade);
         parent.appendChild(list);
       } else if (data[i].priority === 2) {
         const list = document.createElement('li');
